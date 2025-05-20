@@ -25,6 +25,12 @@ jobs:
           npm ci
           npm run build
 
+      - name: Transpile next.config.ts
+        run: |
+          npm install --save-dev @babel/core @babel/cli @babel/preset-typescript
+          echo '{ "presets": ["@babel/preset-typescript"] }' > babel.config.json
+          npx babel next.config.ts --out-file next.config.js
+
       - name: Prepare deployment package
         run: |
           mkdir deploy
